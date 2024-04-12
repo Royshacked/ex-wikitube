@@ -15,11 +15,11 @@ function searchValue() {
     getVideo(value)
         .then(renderVideo)
         .then(renderVideos)
-        .catch(err=> alert(err))
+        .catch(err => alert(err))
 
     getWiki(value)
         .then(renderWiki)
-        .catch(err=> alert(err))
+        .catch(err => alert(err))
 }
 
 function renderVideo(videos) {
@@ -30,18 +30,18 @@ function renderVideo(videos) {
 
     return videos
 }
- 
+
 function renderVideos(videos) {
-    
+
 }
 
 function renderWiki(results) {
-    const title = results[0].snippet
-    const album = results[1].snippet
-    
-    const strHtml = `
-        <p>${title}</p>
-        <p>${album}</p>
-    `
-    document.querySelector('.main-video').innerHTML += strHtml
+    const strHtml = results.map(result =>
+        `
+            <h2>${result.title}</h2>
+            <p>${result.snippet}</p>
+        `
+    ).join('')
+
+    document.querySelector('.main-text').innerHTML = strHtml
 }

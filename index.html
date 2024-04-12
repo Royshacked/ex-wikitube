@@ -8,18 +8,19 @@
     <title>Wikitube</title>
 </head>
 
-<body>
+<body onload="onInit()">
     <header>
         <h1>Wikitube</h1>
-        <form autocomplete="on" onsubmit="onSearch(event)">
-            <input type="search" placeholder="Search">
+        <form onsubmit="onSearch(event)">
+            <input type="search" placeholder="Search" value="guns n roses">
             <button>Search</button>
         </form>
     </header>
 
     <main>
-        <section class="movies-list"></section>
-        <section class="movie"></section>
+        <section class="videos-list"></section>
+        <section class="main-video">
+        </section>
     </main>
     <script src="lib/axios.js"></script>
 

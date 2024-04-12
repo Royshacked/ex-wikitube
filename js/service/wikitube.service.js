@@ -2,12 +2,6 @@
 
 const YOUTUBE_KEY = 'AIzaSyAHYdeu4hKJj6S_nfyw1kBbOXX1pt4NUsc'
 
-// const YOUTUBE_URL = `
-// https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${YOUTUBE_KEY}&q=${value}`
-
-// const WIKI_URL = `
-// https://en.wikipedia.org/w/api.php?&origin=*&action=query&list=search&srsearch=${value}&format=json`
-
 function getVideo(value) {
     const videos = loadFromStorage(`${value}`)
     if (videos) return Promise.resolve(videos)

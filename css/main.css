@@ -41,7 +41,49 @@ header button {
     cursor: pointer;
 }
 
+.main-container {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+
+    gap:20px;
+
+    padding: 1em;
+}
+
+.videos-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.videos-list-item {
+    display: flex;
+    align-items: center;
+
+    gap: 1em;
+    width: 80%;
+    padding: 1em;
+
+    background-color: rgb(51, 46, 46);
+}
+
+.videos-list-item h2 {
+    font-size: 1em;
+
+    color: rgb(253, 124, 4);
+}
+
 .video-text-container {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    gap: 20px;
 }
+
+.main-text h2,p{
+    color: rgb(35, 106, 238);
+}
+

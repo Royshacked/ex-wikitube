@@ -24,7 +24,7 @@ function searchValue() {
 
 function renderVideo(videos) {
     const videoId = videos[0].id.videoId
-    const strHtml = `<iframe width="420" height="315" src="https://www.youtube.com/embed/${videoId}"></iframe>`
+    const strHtml = `<iframe width="600" height="350" src="https://www.youtube.com/embed/${videoId}"></iframe>`
 
     document.querySelector('.main-video').innerHTML = strHtml
 
@@ -35,7 +35,7 @@ function renderVideos(videos) {
     const strHtml = videos.map(video =>
         `
             <div class="videos-list-item">
-                <iframe width="420" height="315" src="https://www.youtube.com/embed/${video.id.videoId}"></iframe>
+                <iframe width="200" height="100" src="https://www.youtube.com/embed/${video.id.videoId}"></iframe>
                 <h2>${video.snippet.title}</h2>
             </div>
     `).join('')

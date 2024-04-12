@@ -11,12 +11,16 @@ body {
 }
 
 header {
+    position:sticky;
+    top:0;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     padding: 1em;
-    outline: 2px solid black;
+    outline: 1px solid rgba(0, 0, 0, 0.74);
+
+    background-color: rgb(255, 123, 0);
 }
 
 header h1 {
@@ -43,8 +47,8 @@ header button {
 
 .main-container {
     display: grid;
-    grid-template-columns: repeat(2,1fr);
-
+    grid-template-columns:  1fr 2fr;
+       
     gap:20px;
 
     padding: 1em;
@@ -53,6 +57,7 @@ header button {
 .videos-list {
     display: flex;
     flex-direction: column;
+    align-items: center;
 
     gap: 20px;
 }
@@ -69,7 +74,7 @@ header button {
 }
 
 .videos-list-item h2 {
-    font-size: 1em;
+    font-size: 0.8em;
 
     color: rgb(253, 124, 4);
 }
@@ -83,7 +88,65 @@ header button {
     gap: 20px;
 }
 
-.main-text h2,p{
+.text-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    padding: 1em;
     color: rgb(35, 106, 238);
+
+    transition: 400ms;
 }
+
+.text-item:hover {
+    color: rgb(8, 45, 114);
+    text-decoration: underline;
+
+    cursor: pointer;
+}
+
+
+
+
+@media screen and (max-width: 830px) {
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        
+        gap:20px;
+    
+        padding: 1em;
+    }
+
+    header {
+        display: flex;
+        flex-direction: column;
+    }
+
+    header h1 {
+        font-size: 3em;
+    }
+
+    header form input {
+        padding: 0.6em;
+        border-radius: 0.2em;
+    
+        font-size: 0.6em;
+    }
+
+    header button {
+        padding: 0.6em;
+    
+        font-size: 0.6em;
+    }
+
+    .main-video iframe {
+        width: 300px;
+        height: 200px;
+    }
+}
+
+
+
 

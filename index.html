@@ -12,22 +12,19 @@
     <header>
         <h1>Wikitube</h1>
         <form onsubmit="onSearch(event)">
-            <input type="search" placeholder="Search" value="guns n roses">
+            <input type="search" placeholder="Search" value="metallica">
             <button>Search</button>
         </form>
     </header>
 
     <main class="main-container">
-        <section class="videos-list">
-            <div class="videos-list-item">
-                <iframe width="420" height="315" src="https://www.youtube.com/embed/${videoId}"></iframe>
-                <h2></h2>
-            </div>
-        </section>
-
         <section class="video-text-container">
             <div class="main-video"></div>
             <div class="main-text"></div>
+        </section>
+
+        <section class="videos-list">
+            <div class="videos-list-item"></div>
         </section>
     </main>
 

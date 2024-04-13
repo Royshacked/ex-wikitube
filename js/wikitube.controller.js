@@ -37,6 +37,7 @@ function renderVideos(videos) {
         `
             <div class="videos-list-item">
                 <iframe width="125" height="75" src="https://www.youtube.com/embed/${video.id.videoId}"></iframe>
+                <iframe width="125" height="75" src="https://www.youtube.com/embed/${video.id.videoId}"></iframe>
                 <h2>${video.snippet.title}</h2>
             </div>
     `).join('')
@@ -48,8 +49,10 @@ function renderVideos(videos) {
 function renderWiki(results) {
     const strHtml = results.map(result =>
         `<div class="text-item"> 
+        `<div class="text-item"> 
             <h2>${result.title}</h2>
             <p>${result.snippet}</p>
+        </div>
         </div>
         `
     ).join('')

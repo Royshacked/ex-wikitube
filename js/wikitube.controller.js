@@ -2,16 +2,15 @@
 
 function onInit() {
     onSearchValue()
-    onSearchValue()
 }
 
 
 function onSearchValue() {
-function onSearchValue() {
     const value = document.querySelector('input').value
-    getVideo(value)
+    getVideos(value)
         .then(renderVideo)
         .then(renderVideos)
+        .then(renderHistory)
         .catch(err => alert(err))
 
     getWiki(value)
@@ -37,9 +36,11 @@ function renderVideos(videos) {
             <iframe width="125" height="75" src="https://www.youtube.com/embed/${video.id.videoId}"></iframe>
             <h2>${video.snippet.title}</h2>
         </div>`).join('')
-        
+
     document.querySelector('.videos-list').innerHTML = strHtml
     document.querySelector('input').value = ''
+
+    return videos
 }
 
 
@@ -54,8 +55,25 @@ function renderWiki(results) {
 }
 
 
+function renderHistory() {
+    const history = getHistory()
+    if (!history || history.length === 0) {
+        document.querySelector('.main-history').innerHTML = ''
+        return
+    }
+    const strHtml = history.map(item => `<div>${item}</div>`).join('')
+
+    document.querySelector('.main-history').innerHTML = strHtml
+}
+
+
 function onSearch(ev) {
     ev.preventDefault()
 
     onSearchValue()
+}
+
+function onClearHistory() {
+    clearHistory()
+        .then(renderHistory)
 }

@@ -11,8 +11,8 @@ body {
 }
 
 header {
-    position:sticky;
-    top:0;
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -25,12 +25,12 @@ header {
 
 header h1 {
     font-size: 5em;
-    font-weight:1000;
+    font-weight: 1000;
 }
 
 header form input {
     width: 30vw;
-    
+
     padding: 1em;
     border-radius: 0.2em;
 
@@ -47,9 +47,9 @@ header button {
 
 .main-container {
     display: grid;
-    grid-template-columns:  1fr 2fr;
-       
-    gap:20px;
+    grid-template-columns: 1fr 2fr;
+
+    gap: 20px;
 
     padding: 1em;
 }
@@ -102,9 +102,48 @@ header button {
 .text-item:hover {
     color: rgb(8, 45, 114);
     text-decoration: underline;
-
-    cursor: pointer;
 }
+
+footer {
+    position: sticky;
+    bottom: 0;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    align-items: center;
+
+    height: min-content;
+    padding: 1em;
+    outline: 1px solid rgba(0, 0, 0, 0.74);
+
+    background-color: rgb(216, 144, 138);
+}
+
+footer h2 {
+    /* padding: 0.5em; */
+    font-weight: 800;
+}
+
+.main-history {
+    display: grid;
+    /* grid-template-rows: repeat(auto-fit, min-content); */
+    grid-auto-flow: column;
+
+    gap: 10px;
+    /* list-style: none; */
+}
+
+footer .main-history div {
+    padding: 0.5em;
+    border-inline-end: 1px solid rgb(4, 100, 4);
+
+    color: rgb(4, 100, 4);
+
+    font-weight: bold;
+}
+
+
 
 
 
@@ -113,9 +152,9 @@ header button {
     .main-container {
         display: flex;
         flex-direction: column;
-        
-        gap:20px;
-    
+
+        gap: 20px;
+
         padding: 1em;
     }
 
@@ -131,13 +170,13 @@ header button {
     header form input {
         padding: 0.6em;
         border-radius: 0.2em;
-    
+
         font-size: 0.6em;
     }
 
     header button {
         padding: 0.6em;
-    
+
         font-size: 0.6em;
     }
 
@@ -146,7 +185,3 @@ header button {
         height: 200px;
     }
 }
-
-
-
-

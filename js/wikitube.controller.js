@@ -2,9 +2,11 @@
 
 function onInit() {
     onSearchValue()
+    onSearchValue()
 }
 
 
+function onSearchValue() {
 function onSearchValue() {
     const value = document.querySelector('input').value
     getVideo(value)
@@ -18,7 +20,7 @@ function onSearchValue() {
 }
 
 
-function renderVideo(videos,Vidid) {
+function renderVideo(videos) {
     const videoId = videos[0].id.videoId
 
     const strHtml = `<iframe width="400" height="300" src="https://www.youtube.com/embed/${videoId}"></iframe>`

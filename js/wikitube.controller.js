@@ -1,4 +1,11 @@
-'use strict'
+
+import { wikiTubeService } from "./service/wikitube.service.js"
+import { storageService } from "./service/storage.service.js"
+
+window.onInit = onInit
+window.onSearch = onSearch
+window.onClearHistory = onClearHistory
+
 
 function onInit() {
     onSearchValue()
@@ -7,13 +14,13 @@ function onInit() {
 
 function onSearchValue() {
     const value = document.querySelector('input').value
-    getVideos(value)
+    wikiTubeService.getVideos(value)
         .then(renderVideo)
         .then(renderVideos)
         .then(renderHistory)
         .catch(err => alert(err))
 
-    getWiki(value)
+    wikiTubeService.getWiki(value)
         .then(renderWiki)
         .catch(err => alert(err))
 }
@@ -25,7 +32,6 @@ function renderVideo(videos) {
     const strHtml = `<iframe width="400" height="300" src="https://www.youtube.com/embed/${videoId}"></iframe>`
 
     document.querySelector('.main-video').innerHTML = strHtml
-    document.querySelector('input').value = ''
     return videos
 }
 
@@ -56,7 +62,7 @@ function renderWiki(results) {
 
 
 function renderHistory() {
-    const history = getHistory()
+    const history = wikiTubeService.getHistory()
     if (!history || history.length === 0) {
         document.querySelector('.main-history').innerHTML = ''
         return
@@ -74,6 +80,6 @@ function onSearch(ev) {
 }
 
 function onClearHistory() {
-    clearHistory()
+    wikiTubeService.clearHistory()
         .then(renderHistory)
 }

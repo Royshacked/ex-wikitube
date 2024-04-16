@@ -1,10 +1,20 @@
-'use strict'
+
+export const wikiTubeService = {
+    getVideos,
+    getWiki,
+    getHistory,
+    clearHistory,
+}
+
+// import { storageService } from "./storage.service.js"
+import { storageService } from "./storage.service.js"
+
 
 const YOUTUBE_KEY = 'AIzaSyAHYdeu4hKJj6S_nfyw1kBbOXX1pt4NUsc'
 
 
 function getVideos(value) {
-    const items = loadFromStorage('searchItems')
+    const items = storageService.loadFromStorage('searchItems')
     const item = getSearchItem(items, value)
     if (item) return Promise.resolve(item.videoIds)
 
@@ -39,7 +49,7 @@ function getWiki(value) {
 
 
 function getHistory() {
-    return loadFromStorage('searchItems')
+    return storageService.loadFromStorage('searchItems')
 }
 
 
@@ -66,5 +76,5 @@ function clearHistory() {
 
 function _saveSearchItem(items, value, videoIds) {
     items.push({ value, videoIds })
-    saveToStorage('searchItems', items)
+    storageService.saveToStorage('searchItems', items)
 }

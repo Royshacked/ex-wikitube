@@ -14,10 +14,12 @@ const YOUTUBE_KEY = 'AIzaSyAHYdeu4hKJj6S_nfyw1kBbOXX1pt4NUsc'
 
 
 function getVideos(value) {
-    const items = storageService.loadFromStorage('searchItems')
+    const items = storageService.loadFromStorage('searchItems') || []
     const item = getSearchItem(items, value)
-    if (item) return Promise.resolve(item.videoIds)
-
+    if (item) {
+        console.log('from storage')
+        return Promise.resolve(item.videoIds)
+    }
     const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${YOUTUBE_KEY}&q=${value}`
 
     return axios.get(url)

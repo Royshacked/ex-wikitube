@@ -39,7 +39,7 @@ function renderVideo(videos) {
 function renderVideos(videos) {
     const strHtml = videos.map(video =>
         `<div class="videos-list-item" >
-            <iframe width="125" height="75" src="https://www.youtube.com/embed/${video.id.videoId}"></iframe>
+            <img src="${video.snippet.thumbnails.default.url}">
             <h2>${video.snippet.title}</h2>
         </div>`).join('')
 

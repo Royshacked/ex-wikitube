@@ -31,7 +31,6 @@ function onSearchValue() {
 
 
 function renderVideo(id) {
-    console.log(id)
     const strHtml = `<iframe width="400" height="300" src="https://www.youtube.com/embed/${id}"></iframe>`
 
     document.querySelector('.main-video').innerHTML = strHtml

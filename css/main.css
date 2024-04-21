@@ -143,6 +143,17 @@ footer .main-history div {
     font-weight: bold;
 }
 
+footer button {
+    margin-inline-start: 1em;
+    padding: 1em;
+    border: 0;
+
+    background-color: rgb(4, 100, 4);
+    color: red;
+
+    cursor: pointer;
+}
+
 
 
 

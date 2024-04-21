@@ -6,36 +6,47 @@ export const wikiTubeService = {
     clearHistory,
 }
 
-// import { storageService } from "./storage.service.js"
 import { storageService } from "./storage.service.js"
 
 
 const YOUTUBE_KEY = 'AIzaSyAHYdeu4hKJj6S_nfyw1kBbOXX1pt4NUsc'
+var gHistory = storageService.load('itemsHistory') || []
 
 
-function getVideos(value) {
-    const items = storageService.loadFromStorage('searchItems') || []
-    const item = getSearchItem(items, value)
-    if (item) {
+function getVideos(searchValue) {
+    const value = searchValue.toLowerCase()
+    const itemsMap = storageService.load('searchItems') || {}
+    if (itemsMap[value]) {
         console.log('from storage')
-        return Promise.resolve(item.videoIds)
+        return Promise.resolve(itemsMap[value])
     }
     const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${YOUTUBE_KEY}&q=${value}`
 
     return axios.get(url)
-        .then(results => {
-            _saveSearchItem(items, value, results.data.items)
-            return results.data.items
+        .then(results => results.data)
+        .then(results => results.items)
+        .then(items => items.map(item => ({
+            id: item.id.videoId,
+            title: item.snippet.title,
+            img: {
+                url: item.snippet.thumbnails.default.url,
+                height: item.snippet.thumbnails.default.height,
+                width: item.snippet.thumbnails.default.width,
+            }
+        }))
+        )
+        .then(items => {
+            console.log(value)
+            itemsMap[value] = items
+            storageService.save('searchItems', itemsMap)
+            gHistory.push(value)
+            storageService.save('itemsHistory', gHistory)
+            return items
         })
         .catch(err => {
             console.log(err)
             throw err
         })
-}
-
-function getSearchItem(items, value) {
-    if (!items) return
-    return items.find(item => item.value.toLowerCase() === value.toLowerCase())
 }
 
 
@@ -51,7 +62,7 @@ function getWiki(value) {
 
 
 function getHistory() {
-    return storageService.loadFromStorage('searchItems')
+    return storageService.load('itemsHistory')
 }
 
 
@@ -66,7 +77,7 @@ function clearHistory() {
         confirmButtonText: "Yes, delete it!"
     }).then((result) => {
         if (result.isConfirmed) {
-            localStorage.clear('searchItems')
+            localStorage.removeItem('itemsHistory')
             Swal.fire({
                 title: "Deleted!",
                 text: "History has been deleted.",
@@ -74,9 +85,4 @@ function clearHistory() {
             });
         }
     });
-}
-
-function _saveSearchItem(items, value, videoIds) {
-    items.push({ value, videoIds })
-    storageService.saveToStorage('searchItems', items)
 }

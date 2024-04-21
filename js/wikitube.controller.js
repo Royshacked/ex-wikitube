@@ -5,6 +5,7 @@ import { storageService } from "./service/storage.service.js"
 window.onInit = onInit
 window.onSearch = onSearch
 window.onClearHistory = onClearHistory
+window.onRenderVideo = renderVideo
 
 
 function onInit() {
@@ -15,10 +16,13 @@ function onInit() {
 function onSearchValue() {
     const value = document.querySelector('input').value
     wikiTubeService.getVideos(value)
-        .then(renderVideo)
+        .then(videos => {
+            renderVideo(videos[0].id)
+            return videos
+        })
         .then(renderVideos)
         .then(renderHistory)
-        .catch(err => alert(err))
+    // .catch(err => alert(err))
 
     wikiTubeService.getWiki(value)
         .then(renderWiki)
@@ -26,21 +30,19 @@ function onSearchValue() {
 }
 
 
-function renderVideo(videos) {
-    const videoId = videos[0].id.videoId
-
-    const strHtml = `<iframe width="400" height="300" src="https://www.youtube.com/embed/${videoId}"></iframe>`
+function renderVideo(id) {
+    console.log(id)
+    const strHtml = `<iframe width="400" height="300" src="https://www.youtube.com/embed/${id}"></iframe>`
 
     document.querySelector('.main-video').innerHTML = strHtml
-    return videos
 }
 
 
 function renderVideos(videos) {
     const strHtml = videos.map(video =>
-        `<div class="videos-list-item" >
-            <img src="${video.snippet.thumbnails.default.url}">
-            <h2>${video.snippet.title}</h2>
+        `<div class="videos-list-item" onclick="onRenderVideo('${video.id}')" >
+            <img src="${video.img.url}">
+            <h2>${video.title}</h2>
         </div>`).join('')
 
     document.querySelector('.videos-list').innerHTML = strHtml
@@ -67,7 +69,7 @@ function renderHistory() {
         document.querySelector('.main-history').innerHTML = ''
         return
     }
-    const strHtml = history.map(item => `<div>${item}</div>`).join('')
+    const strHtml = history.map(item => `<div>${item.charAt(0).toUpperCase() + item.slice(1)}</div>`).join('')
 
     document.querySelector('.main-history').innerHTML = strHtml
 }

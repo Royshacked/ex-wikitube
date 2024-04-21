@@ -22,7 +22,7 @@ function onSearchValue() {
         })
         .then(renderVideos)
         .then(renderHistory)
-    // .catch(err => alert(err))
+        .catch(err => alert(err))
 
     wikiTubeService.getWiki(value)
         .then(renderWiki)

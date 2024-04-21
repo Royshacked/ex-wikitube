@@ -18,6 +18,7 @@ function getVideos(searchValue) {
     const itemsMap = storageService.load('searchItems') || {}
     if (itemsMap[value]) {
         console.log('from storage')
+        _saveToHistory(value)
         return Promise.resolve(itemsMap[value])
     }
     const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${YOUTUBE_KEY}&q=${value}`
@@ -39,8 +40,7 @@ function getVideos(searchValue) {
             console.log(value)
             itemsMap[value] = items
             storageService.save('searchItems', itemsMap)
-            gHistory.push(value)
-            storageService.save('itemsHistory', gHistory)
+            _saveToHistory(value)
             return items
         })
         .catch(err => {
@@ -85,4 +85,11 @@ function clearHistory() {
             });
         }
     });
+}
+
+function _saveToHistory(value) {
+    if (gHistory.find(item => item === value)) return
+
+    gHistory.push(value)
+    storageService.save('itemsHistory', gHistory)
 }

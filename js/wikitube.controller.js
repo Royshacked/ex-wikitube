@@ -6,6 +6,7 @@ window.onInit = onInit
 window.onSearch = onSearch
 window.onClearHistory = onClearHistory
 window.onRenderVideo = renderVideo
+window.onPlayVideo = onPlayVideo
 
 
 function onInit() {
@@ -39,7 +40,7 @@ function renderVideo(id) {
 
 function renderVideos(videos) {
     const strHtml = videos.map(video =>
-        `<div class="videos-list-item" onclick="onRenderVideo('${video.id}')" >
+        `<div class="videos-list-item" onclick="onPlayVideo('${video.id}')" >
             <img src="${video.img.url}">
             <h2>${video.title}</h2>
         </div>`).join('')
@@ -48,6 +49,11 @@ function renderVideos(videos) {
     document.querySelector('input').value = ''
 
     return videos
+}
+
+function onPlayVideo(videoId) {
+    const elVideoPlayer = document.querySelector('iframe')
+    elVideoPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1"`
 }
 
 

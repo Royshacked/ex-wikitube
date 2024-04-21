@@ -143,6 +143,15 @@ footer .main-history div {
     color: rgb(4, 100, 4);
 
     font-weight: bold;
+
+    cursor: pointer;
+}
+
+footer .main-history div:hover {
+    border-block-end: 1px solid rgb(120, 231, 56);
+    border-inline-end: 1px solid rgb(120, 231, 56);
+
+    color: rgb(120, 231, 56);
 }
 
 footer button {
@@ -155,9 +164,6 @@ footer button {
 
     cursor: pointer;
 }
-
-
-
 
 
 

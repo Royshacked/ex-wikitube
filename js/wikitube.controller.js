@@ -7,6 +7,7 @@ window.onSearch = onSearch
 window.onClearHistory = onClearHistory
 window.onRenderVideo = renderVideo
 window.onPlayVideo = onPlayVideo
+window.onSearchValue = onSearchValue
 
 
 function onInit() {
@@ -14,8 +15,8 @@ function onInit() {
 }
 
 
-function onSearchValue() {
-    const value = document.querySelector('input').value
+function onSearchValue(val) {
+    const value = val || document.querySelector('input').value
     wikiTubeService.getVideos(value)
         .then(videos => {
             renderVideo(videos[0].id)
@@ -74,7 +75,10 @@ function renderHistory() {
         document.querySelector('.main-history').innerHTML = ''
         return
     }
-    const strHtml = history.map(item => `<div>${item.charAt(0).toUpperCase() + item.slice(1)}</div>`).join('')
+    const strHtml = history.map(item => `
+    <div onclick="onSearchValue('${item}')">
+        ${item.charAt(0).toUpperCase() + item.slice(1)}
+    </div>`).join('')
 
     document.querySelector('.main-history').innerHTML = strHtml
 }
